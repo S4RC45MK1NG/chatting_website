@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		const username = document.getElementById('username').value.trim();
 		const room_code = document.getElementById('room_code').value;
 
-		let date = new Date().timezone;
-		date.setMinutes(date.getMinutes()+5);
-		alert(date)
+		let date = new Date.UTC();
+		alert(date.getMinutes())
 		// document.cookie = `chat-user="${username}, expires="`
 
 		if (!username || !room_code) {
