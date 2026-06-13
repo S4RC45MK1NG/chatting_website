@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
 
-const socket = io()
+const socket = io("10.60.1.2:3000")
 
 socket.on('connect', () => {
     console.log(socket.id);
