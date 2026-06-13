@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		let date = new Date();
 		date.setMinutes(date.getMinutes()+5)
-		document.cookie = `chat-user="${username}", expires=${date.toUTCString()}; path=/`
+		document.cookie = `chat-user="${username}"; expires=${date.toUTCString()}; path=/`
 
 		// Simple client-side placeholder check. Replace with real auth.
 		msg.style.color = '#065f46';
