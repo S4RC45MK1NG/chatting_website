@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		const username = document.getElementById('username').value.trim();
 		const room_code = document.getElementById('room_code').value;
 
-		let date = Date.UTC();
-		alert(date.getMinutes())
+		let date = new Date();
+		alert(date.toUTCString());
 		// document.cookie = `chat-user="${username}, expires="`
 
 		if (!username || !room_code) {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			msg.style.color = '#b91c1c';
 			return;
 		}
-        
+
 
 		// Simple client-side placeholder check. Replace with real auth.
 		msg.style.color = '#065f46';
