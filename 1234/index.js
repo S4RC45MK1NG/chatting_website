@@ -22,9 +22,6 @@ function appendMessage(text, user) {
     const message = document.createElement('article');
     message.className = 'message ' + user;
     const userLabel;
-    if () {
-
-    }
 
     message.innerHTML = `
     <strong>${userLabel}</strong>
