@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}, 700);
 		setTimeout(() => {
 			// Redirect to local chat page
-			window.location.href = `https://sigamboi.hackclub.app/${room_code}`;
+			window.location.href = `https://sigmaboi.hackclub.app/${room_code}`;
 		}, 1000);
 	});
 });
