@@ -21,7 +21,7 @@ console.log(getuser_cookie());
 function appendMessage(text, user) {
     const message = document.createElement('article');
     message.className = 'message ' + user;
-    const userLabel;
+    let userLabel;
 
     message.innerHTML = `
     <strong>${userLabel}</strong>
