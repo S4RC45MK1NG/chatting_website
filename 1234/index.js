@@ -1,6 +1,15 @@
+import { io } from "socket.io-client";
+
+const socket = io("https://sigmaboi.hackclub.app/1234:3000")
+
+socket.on('connect', () => {
+    console.log(socket.id);
+});
+
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
+
 
 function getuser_cookie() {
     const cookies = document.cookie.split(';');
@@ -16,12 +25,16 @@ function getuser_cookie() {
     return null;
 }
 
-console.log(getuser_cookie());
+const myuser = getuser_cookie();
 
 function appendMessage(text, user) {
     const message = document.createElement('article');
     message.className = 'message ' + user;
     let userLabel;
+
+    if (userLabel === myuser) {
+        userLabel = "You";
+    }
 
     message.innerHTML = `
     <strong>${userLabel}</strong>
@@ -35,8 +48,9 @@ function appendMessage(text, user) {
 
 function sendMessage() {
     const text = chatInput.value.trim();
-    if (!text) return;
-    appendMessage(text, 'user');
+
+
+
     chatInput.value = '';
     sendButton.disabled = true;
     setTimeout(() => {
