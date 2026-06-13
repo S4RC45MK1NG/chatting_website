@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const username = document.getElementById('username').value.trim();
 		const room_code = document.getElementById('room_code').value;
 
-		let date = new Date.UTC();
+		let date = Date.UTC();
 		alert(date.getMinutes())
 		// document.cookie = `chat-user="${username}, expires="`
 
