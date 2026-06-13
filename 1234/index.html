@@ -178,52 +178,6 @@
     </section>
   </main>
 
-  <script>
-    const messageList = document.getElementById('messageList');
-    const chatInput = document.getElementById('chatInput');
-    const sendButton = document.getElementById('sendButton');
-
-    function appendMessage(text, role) {
-      const message = document.createElement('article');
-      message.className = 'message ' + role;
-      const roleLabel = role === 'user' ? 'You' : 'Assistant';
-
-      message.innerHTML = `
-        <strong>${roleLabel}</strong>
-        <p>${text}</p>
-        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
-      `;
-
-      messageList.appendChild(message);
-      messageList.scrollTop = messageList.scrollHeight;
-    }
-
-    function sendMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-      appendMessage(text, 'user');
-      chatInput.value = '';
-      sendButton.disabled = true;
-      setTimeout(() => {
-        appendMessage(`I heard: ${text}`, 'assistant');
-        sendButton.disabled = false;
-        chatInput.focus();
-      }, 600);
-    }
-
-    chatInput.addEventListener('input', () => {
-      sendButton.disabled = !chatInput.value.trim();
-    });
-
-    chatInput.addEventListener('keydown', event => {
-      if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        sendMessage();
-      }
-    });
-
-    sendButton.addEventListener('click', sendMessage);
-    chatInput.focus();
-  </script>
+  <script src="index.js"></script>
 </body>
 </html>
