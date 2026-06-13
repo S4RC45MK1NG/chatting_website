@@ -1,9 +1,9 @@
 import { Server } from "socket.io";
 import express from "express";
-import http from "http";
+import { createServer } from "http";
 
 const app = express();
-const server = http.createServer(app);
+const server = createServer(app);
 const io = new Server(server);
 
 var users = {};
