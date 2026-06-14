@@ -29,12 +29,25 @@ const myuser = getuser_cookie();
 socket.on('connect', () => {
     console.log(socket.id);
     socket.emit("user", myuser)
+
 });
+
+socket.on("message", (text) => {
+    const [user, msg] = text.split(":");
+
+    console.log(text)
+
+    appendMessage(msg, user);
+
+})
+
+
+
 
 function appendMessage(text, user) {
     const message = document.createElement('article');
     message.className = 'message ' + user;
-    let userLabel;
+    let userLabel = user;
 
     if (userLabel === myuser) {
         userLabel = "You";
@@ -53,12 +66,11 @@ function appendMessage(text, user) {
 function sendMessage() {
     const text = chatInput.value.trim();
 
-
+    socket.emit("message", `${myuser}:${text}`);
 
     chatInput.value = '';
     sendButton.disabled = true;
     setTimeout(() => {
-    appendMessage(`I heard: ${text}`, 'assistant');
     sendButton.disabled = false;
     chatInput.focus();
     }, 600);
