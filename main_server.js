@@ -12,7 +12,7 @@ io.on('connection', (socket) => {
     
     const user_id = socket.id;
 
-    console.log(`User connected: ${user_ids}`);
+    console.log(`User connected: ${user_id}`);
     
 
     socket.on("user", (username) => {
