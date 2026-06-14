@@ -9,8 +9,16 @@ const io = new Server(server);
 var users = {};
 
 io.on('connection', (socket) => {
-    console.log(`User connected: ${socket.id}`);
     
+    const user_id = socket.id;
+
+    console.log(`User connected: ${user_ids}`);
+    
+
+    socket.on("user", (username) => {
+        users[user_id] = username;
+        console.log(users);
+    })
 
     socket.on('message', (msg) => {
         console.log(`Received: ${msg}`);
@@ -20,7 +28,9 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);
+        delete users[user_id];
     });
+
 });
 
 server.listen(3000, () => {

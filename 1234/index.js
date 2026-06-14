@@ -2,10 +2,6 @@ import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
 
 const socket = io()
 
-socket.on('connect', () => {
-    console.log(socket.id);
-});
-
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
@@ -25,7 +21,15 @@ function getuser_cookie() {
     return null;
 }
 
+
 const myuser = getuser_cookie();
+
+
+// First Connection
+socket.on('connect', () => {
+    console.log(socket.id);
+    socket.emit("user", myuser)
+});
 
 function appendMessage(text, user) {
     const message = document.createElement('article');
