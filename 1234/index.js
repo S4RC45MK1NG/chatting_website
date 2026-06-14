@@ -42,6 +42,15 @@ socket.on("message", (text) => {
 })
 
 
+// Debugging
+socket.on("disconnect", (reason) => {
+    console.log("Disconnected:", reason);
+});
+
+socket.on("connect_error", (err) => {
+    console.log("Connect error:", err.message);
+});
+
 
 
 function appendMessage(text, user) {
