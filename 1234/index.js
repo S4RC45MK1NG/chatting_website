@@ -1,6 +1,8 @@
 import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
 
-const socket = io()
+const socket = io({
+    transports: ["websocket"]
+});
 
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
