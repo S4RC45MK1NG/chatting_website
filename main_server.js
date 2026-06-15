@@ -4,7 +4,7 @@ import { createServer } from "http";
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {pingTimeout=50000});
+const io = new Server(server, pingTimeout=50000);
 
 var users = {};
 
