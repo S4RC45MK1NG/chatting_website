@@ -13,6 +13,10 @@ const io = new Server(server, {
 
 var users = {};
 
+io.engine.on("connection", () => {
+    console.log("ENGINE CONNECTION");
+});
+
 io.on('connection', (socket) => {
     
     const user_id = socket.id;
