@@ -33,7 +33,9 @@ socket.on('connect', () => {
 });
 
 socket.on("message", (text) => {
-    const [user, msg] = text.split(":");
+    const split_txt = text.split(":");
+    const user = split_txt[0];
+    const msg = split_txt.slice(1).join(":");
 
     console.log(text)
     if (user != myuser) {
@@ -64,6 +66,14 @@ function appendMessage(text, user) {
 
     if (userLabel === myuser) {
         userLabel = "You";
+    }
+
+    let sect = text.split(" ");
+    var link_loc;
+    for (i=0; i < sect.length; i++) {
+        if (sect[i].slice(0, 3) == "http") {
+            sect[i] = `<a href="${sect[i]}">${sect[i]}</a>`;
+        }
     }
 
     message.innerHTML = `
