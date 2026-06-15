@@ -1,6 +1,6 @@
 import { io } from "https://cdn.socket.io/4.8.3/socket.io.esm.min.js";
 
-const socket = io("https://sigmaboi.hackclub.app:3000");
+const socket = io();
 
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
@@ -36,6 +36,10 @@ socket.on("message", (text) => {
     const [user, msg] = text.split(":");
 
     console.log(text)
+    if (user != myuser) {
+        var audio = new Audio('notif_sound.mp3');
+        audio.play();
+    }
 
     appendMessage(msg, user);
 
