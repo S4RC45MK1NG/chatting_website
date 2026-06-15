@@ -4,13 +4,10 @@ import { createServer } from "http";
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {pingTimeout=50000});
 
 var users = {};
 
-io.engine.on("connection", () => {
-    console.log("ENGINE CONNECTION");
-});
 
 io.on('connection', (socket) => {
     
