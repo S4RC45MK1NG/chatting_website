@@ -70,7 +70,7 @@ function appendMessage(text, user) {
 
     let sect = text.split(" ");
     var link_loc;
-    for (i=0; i < sect.length; i++) {
+    for (var i=0; i < sect.length; i++) {
         if (sect[i].slice(0, 3) == "http") {
             sect[i] = `<a href="${sect[i]}">${sect[i]}</a>`;
         }
