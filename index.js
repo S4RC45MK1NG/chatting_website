@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let date = new Date();
 		date.setMinutes(date.getMinutes()+5)
 		document.cookie = `chat-user=${username}; expires=${date.toUTCString()}; path=/`
+		document.cookie = `room-code=${room_code}; expires=${date.toUTCString()}; path=/`
 
 		// Simple client-side placeholder check. Replace with real auth.
 		msg.style.color = '#065f46';
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}, 700);
 		setTimeout(() => {
 			// Redirect to local chat page
-			window.location.href = `https://sigmaboi.hackclub.app/${room_code}`;
+			window.location.href = `https://sigmaboi.hackclub.app/chat_room`;
 		}, 1000);
 	});
 });

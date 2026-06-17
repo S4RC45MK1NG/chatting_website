@@ -7,14 +7,14 @@ const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
 
 
-function getuser_cookie() {
+function get_cookie(arg) {
     const cookies = document.cookie.split(';');
 
     for (let cookie of cookies) {
-        const [key, myuser] = cookie.trim().split('=');
+        const [key, value] = cookie.trim().split('=');
 
-        if (key === "chat-user") {
-            return myuser;
+        if (key === arg) {
+            return value;
         }
     }
 
@@ -22,13 +22,14 @@ function getuser_cookie() {
 }
 
 
-const myuser = getuser_cookie();
-
+const myuser = get_cookie("chat-user");
+const room_code = get_cookie("room-code");
 
 // First Connection
 socket.on('connect', () => {
     console.log(socket.id);
     socket.emit("user", myuser)
+    socket.emit("room", room_code)
 
 });
 
