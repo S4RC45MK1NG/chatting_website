@@ -31,7 +31,7 @@ const status = document.getElementById("status");
 // First Connection
 socket.on('connect', () => {
     console.log(socket.id);
-    status.innerText = "Online";
+    status.textContent = "Online";
     socket.emit("user", myuser)
     socket.emit("room", room_code)
 
@@ -56,7 +56,7 @@ socket.on("message", (text) => {
 // Debugging
 socket.on("disconnect", (reason) => {
     console.log("Disconnected:", reason);
-    status.innerText = "Offline";
+    status.textContent = "Offline";
 });
 
 socket.on("connect_error", (err) => {
