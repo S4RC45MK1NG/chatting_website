@@ -26,13 +26,14 @@ io.on('connection', (socket) => {
 
     socket.on("room", (room_code) => {
         socket.join(room_code)
+        socket.currentRoom = room_code;
         console.log(`Connected ${user_id} to room ${room_code}`);
     })
 
     socket.on('message', (msg) => {
         console.log(`Received: ${msg}`);
 
-        io.emit('message', msg);
+        io.to(socket.currentRoom).emit('message', msg);
     });
 
     socket.on('disconnect', (reason) => {
