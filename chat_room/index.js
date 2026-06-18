@@ -7,6 +7,12 @@ const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
 
 
+const theme_set = document.getElementById("themeToggle")
+
+
+
+
+
 function get_cookie(arg) {
     const cookies = document.cookie.split(';');
 
@@ -32,6 +38,7 @@ const status = document.getElementById("status");
 socket.on('connect', () => {
     console.log(socket.id);
     status.textContent = "Online";
+    status.style.color = "#34d399";
     socket.emit("user", myuser)
     socket.emit("room", room_code)
 
@@ -57,6 +64,7 @@ socket.on("message", (text) => {
 socket.on("disconnect", (reason) => {
     console.log("Disconnected:", reason);
     status.textContent = "Offline";
+    status.style.color = "#d33e34";
 });
 
 socket.on("connect_error", (err) => {
