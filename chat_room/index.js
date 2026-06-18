@@ -25,9 +25,13 @@ function get_cookie(arg) {
 const myuser = get_cookie("chat-user");
 const room_code = get_cookie("room-code");
 
+// Status Check Element
+const status = document.getElementById("status");
+
 // First Connection
 socket.on('connect', () => {
     console.log(socket.id);
+    status.innerText = "Online";
     socket.emit("user", myuser)
     socket.emit("room", room_code)
 
@@ -52,6 +56,7 @@ socket.on("message", (text) => {
 // Debugging
 socket.on("disconnect", (reason) => {
     console.log("Disconnected:", reason);
+    status.innerText = "Offline";
 });
 
 socket.on("connect_error", (err) => {
