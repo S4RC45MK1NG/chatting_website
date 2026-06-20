@@ -7,10 +7,24 @@ const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
 
 
-const theme_set = document.getElementById("themeToggle")
+const theme_set = document.getElementById("mode-switch");
 
+const link = document.getElementById('themeStyle');
 
-
+theme_set.addEventListener("click", () => {
+    if (theme_set.dataset.theme == "light") {
+    link.href = "dark.css";
+    theme_set.dataset.theme = "dark";
+    theme_set.textContent = "🌙";
+    console.log("set to dark mode");
+    }
+    else {
+    link.href = "light.css"
+    theme_set.dataset.theme = "light";
+    theme_set.textContent = "☀️";
+    console.log("set to light mode");
+    }
+})
 
 
 function get_cookie(arg) {
