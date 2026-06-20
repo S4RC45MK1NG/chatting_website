@@ -47,12 +47,13 @@ const room_code = get_cookie("room-code");
 
 // Status Check Element
 const status = document.getElementById("status");
+status.style.setProperty("--before-bg") = "#d33e34";
 
 // First Connection
 socket.on('connect', () => {
     console.log(socket.id);
     status.textContent = "Online";
-    status.style.background = "#34d399";
+    status.style.setProperty("--before-bg") = "#34d399";
     socket.emit("user", myuser)
     socket.emit("room", room_code)
 
@@ -78,7 +79,7 @@ socket.on("message", (text) => {
 socket.on("disconnect", (reason) => {
     console.log("Disconnected:", reason);
     status.textContent = "Offline";
-    status.style.background = "#d33e34";
+    status.style.setProperty("--before-bg") = "#d33e34";
 });
 
 socket.on("connect_error", (err) => {
