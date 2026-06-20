@@ -99,7 +99,7 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: var("--before-bg");
+  background: var(--before-bg);
   display: inline-block;
 }
 
