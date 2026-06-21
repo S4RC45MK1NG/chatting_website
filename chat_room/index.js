@@ -132,8 +132,15 @@ function appendMessage(text, user) {
     message.setAttribute("data-user", user);
 
     // Code to bundle same-user messages
-    if (!is_sameUser) {
+    if (is_sameUser) {
+        lastMessage.innerHTML += `<p>${text}</p>`;
         
+        // Debugging
+        console.log("same user found");
+        
+    }
+
+    else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
         <p>${text}</p>
@@ -142,13 +149,7 @@ function appendMessage(text, user) {
 
         // Debugging
         console.log("different users");
-    }
-
-    else {
-        lastMessage.innerHTML += `<p>${text}</p>`;
         
-        // Debugging
-        console.log("same user found");
     }
 
     messageList.appendChild(message);
@@ -172,7 +173,7 @@ function sendMessage() {
 
 
 chatInput.addEventListener('input', () => {
-    sendButton.disabled = !chatInput.value.trim() === "";
+    sendButton.disabled = chatInput.value.trim() != "";
 });
 
 chatInput.addEventListener('keydown', event => {
