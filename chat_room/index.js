@@ -94,6 +94,8 @@ function appendMessage(text, user) {
 
     message.className = 'message ' + user;
     let userLabel = user;
+
+    var is_sameUser = false;
     
     try {    
         const lastMessage = messageList.lastChild;
@@ -108,7 +110,7 @@ function appendMessage(text, user) {
         console.log("Couldn't get last message");
     }
 
-    var is_sameUser = false;
+    
 
 
     if (userLabel === myuser) {
@@ -116,7 +118,7 @@ function appendMessage(text, user) {
     }
 
     
-
+    // Code to filter out hyperlinks
     let sect = text.split(" ");
     var link_loc;
     for (var i=0; i < sect.length; i++) {
@@ -129,6 +131,7 @@ function appendMessage(text, user) {
     // Set an attribute to the message regarding the username
     message.setAttribute("data-user", user);
 
+    // Code to bundle same-user messages
     if (!is_sameUser) {
         
         message.innerHTML = `
