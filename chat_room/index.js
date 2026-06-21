@@ -91,8 +91,14 @@ socket.on("connect_error", (err) => {
 // Display Messages
 function appendMessage(text, user) {
     const message = document.createElement('article');
-    const lastMessage = messageList.lastChild;
+    try {
+        const lastMessage = messageList.lastChild;
+    }
 
+    catch (err) {
+        console.log("Couldn't get last msg");
+        console.log(err)
+    }
     var is_sameUser = false;
 
     message.className = 'message ' + user;
