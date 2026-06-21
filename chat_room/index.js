@@ -2,15 +2,14 @@ import { io } from "https://cdn.socket.io/4.8.3/socket.io.esm.min.js";
 
 const socket = io();
 
+// Defined main elements of the web app
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
-
-
 const theme_set = document.getElementById("mode-switch");
+const link = document.getElementById('themeStyle'); // Reference to theme css file
 
-const link = document.getElementById('themeStyle');
-
+// Theme Changer Button Code
 theme_set.addEventListener("click", () => {
     if (theme_set.dataset.theme == "light") {
     link.href = "dark.css";
@@ -26,7 +25,7 @@ theme_set.addEventListener("click", () => {
     }
 })
 
-
+// Get cookies function
 function get_cookie(arg) {
     const cookies = document.cookie.split(';');
 
@@ -41,7 +40,7 @@ function get_cookie(arg) {
     return null;
 }
 
-
+// To get the required cookies
 const myuser = get_cookie("chat-user");
 const room_code = get_cookie("room-code");
 
@@ -49,7 +48,7 @@ const room_code = get_cookie("room-code");
 const status = document.getElementById("status");
 status.style.setProperty("--before-bg", "#d33e34");
 
-// First Connection
+// Connection 
 socket.on('connect', () => {
     console.log(socket.id);
     status.textContent = "Online";
@@ -59,6 +58,7 @@ socket.on('connect', () => {
 
 });
 
+// Messaging
 socket.on("message", (text) => {
     const split_txt = text.split(":");
     const user = split_txt[0];
@@ -75,26 +75,35 @@ socket.on("message", (text) => {
 })
 
 
-// Debugging
+// Disconnect
 socket.on("disconnect", (reason) => {
     console.log("Disconnected:", reason);
     status.textContent = "Offline";
     status.style.setProperty("--before-bg", "#d33e34");
 });
 
+// Connect Error
 socket.on("connect_error", (err) => {
     console.log("Connect error:", err.message);
 });
 
 
-
+// Display Messages
 function appendMessage(text, user) {
     const message = document.createElement('article');
+    const lastMessage = messageList.lastChild;
+
+    var is_sameUser = false;
+
     message.className = 'message ' + user;
     let userLabel = user;
 
     if (userLabel === myuser) {
         userLabel = "You";
+    }
+
+    if (userLabel === lastMessage.dataset.user) {
+        is_sameUser = true;
     }
 
     let sect = text.split(" ");
@@ -106,16 +115,25 @@ function appendMessage(text, user) {
         }
     }
 
-    message.innerHTML = `
-    <strong>${userLabel}</strong>
-    <p>${text}</p>
-    <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
-    `;
+    // Set an attribute to the message regarding the username
+    message.setAttribute("data-user", user);
 
+    if (!is_sameUser) {
+        message.innerHTML = `
+        <strong>${userLabel}</strong>
+        <p>${text}</p>
+        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+        `;
+    }
+
+    else {
+        lastMessage.innerHTML += `<p>${text}</p>`
+    }
     messageList.appendChild(message);
     messageList.scrollTop = messageList.scrollHeight;
 }
 
+// Send Message to server
 function sendMessage() {
     const text = chatInput.value.trim();
 
@@ -128,6 +146,8 @@ function sendMessage() {
     chatInput.focus();
     }, 600);
 }
+
+
 
 chatInput.addEventListener('input', () => {
     sendButton.disabled = !chatInput.value.trim();
