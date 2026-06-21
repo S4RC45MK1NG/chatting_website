@@ -96,6 +96,8 @@ function appendMessage(text, user) {
         const lastMessage = messageList.lastChild;
         if (userLabel === lastMessage.dataset.user) {
             is_sameUser = true;
+            // debugging
+            console.log("found same user sending consecutive messages.")
         }
     }
     catch (err) {
@@ -127,16 +129,24 @@ function appendMessage(text, user) {
     message.setAttribute("data-user", user);
 
     if (!is_sameUser) {
+        
         message.innerHTML = `
         <strong>${userLabel}</strong>
         <p>${text}</p>
         <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
         `;
+
+        // Debugging
+        console.log("different users");
     }
 
     else {
-        lastMessage.innerHTML += `<p>${text}</p>`
+        lastMessage.innerHTML += `<p>${text}</p>`;
+        
+        // Debugging
+        console.log("same user found");
     }
+
     messageList.appendChild(message);
     messageList.scrollTop = messageList.scrollHeight;
 }
@@ -158,7 +168,7 @@ function sendMessage() {
 
 
 chatInput.addEventListener('input', () => {
-    sendButton.disabled = !chatInput.value.trim();
+    sendButton.disabled = !chatInput.value.trim() === "";
 });
 
 chatInput.addEventListener('keydown', event => {
