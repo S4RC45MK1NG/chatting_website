@@ -147,12 +147,14 @@ function appendMessage(text, user) {
         <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
         `;
 
+        messageList.appendChild(message);
+        
         // Debugging
         console.log("different users");
         
     }
 
-    messageList.appendChild(message);
+    
     messageList.scrollTop = messageList.scrollHeight;
 }
 
