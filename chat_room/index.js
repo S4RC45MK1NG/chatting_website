@@ -90,7 +90,10 @@ socket.on("connect_error", (err) => {
 
 // Display Messages
 function appendMessage(text, user) {
-    const message = document.createElement('article');    
+    const message = document.createElement('article');
+
+    message.className = 'message ' + user;
+    let userLabel = user;
     
     try {    
         const lastMessage = messageList.lastChild;
@@ -107,8 +110,6 @@ function appendMessage(text, user) {
 
     var is_sameUser = false;
 
-    message.className = 'message ' + user;
-    let userLabel = user;
 
     if (userLabel === myuser) {
         userLabel = "You";
