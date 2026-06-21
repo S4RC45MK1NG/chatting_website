@@ -90,15 +90,19 @@ socket.on("connect_error", (err) => {
 
 // Display Messages
 function appendMessage(text, user) {
-    const message = document.createElement('article');
-    try {
+    const message = document.createElement('article');    
+    
+    try {    
         const lastMessage = messageList.lastChild;
+        if (userLabel === lastMessage.dataset.user) {
+            is_sameUser = true;
+        }
+    }
+    catch (err) {
+        console.log(`Error Logged:\n${err}`);
+        console.log("Couldn't get last message");
     }
 
-    catch (err) {
-        console.log("Couldn't get last msg");
-        console.log(err)
-    }
     var is_sameUser = false;
 
     message.className = 'message ' + user;
@@ -108,9 +112,7 @@ function appendMessage(text, user) {
         userLabel = "You";
     }
 
-    if (userLabel === lastMessage.dataset.user) {
-        is_sameUser = true;
-    }
+    
 
     let sect = text.split(" ");
     var link_loc;
