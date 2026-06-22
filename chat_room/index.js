@@ -74,6 +74,10 @@ socket.on("message", (text) => {
 
 })
 
+// Code to send videos
+const mediaBtn = document.getElementById("mediaButton");
+
+
 
 // Disconnect
 socket.on("disconnect", (reason) => {
@@ -97,6 +101,7 @@ function appendMessage(text, user) {
 
     var is_sameUser = false;
     
+    // Attempting to get last message
     try {    
         const lastMessage = messageList.lastChild;
         if (userLabel === lastMessage.dataset.user) {
@@ -106,13 +111,14 @@ function appendMessage(text, user) {
         }
     }
     catch (err) {
+        const lastMessage = null;
         console.log(`Error Logged:\n${err}`);
         console.log("Couldn't get last message");
     }
 
     
 
-
+    // Turns ur username into "You"
     if (userLabel === myuser) {
         userLabel = "You";
     }
@@ -143,8 +149,8 @@ function appendMessage(text, user) {
     else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
-        <p>${text}</p>
         <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+        <p>${text}</p>
         `;
 
         messageList.appendChild(message);

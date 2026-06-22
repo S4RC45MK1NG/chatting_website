@@ -124,10 +124,6 @@ body {
   word-wrap: break-word;
 }
 
-.message.assistant {
-  background: #17233b;
-}
-
 .message.user {
   align-self: flex-end;
   background: var(--accent);
@@ -136,12 +132,13 @@ body {
 }
 
 .message strong {
-  display: block;
+  display: inline-block;
   margin-bottom: 8px;
 }
 
 .message p {
   margin: 0;
+  display: inline-block;
 }
 
 .message small {
@@ -194,6 +191,18 @@ body {
   font-size: 0.98rem;
   cursor: pointer;
   transition: transform 0.16s ease, background 0.16s ease;
+}
+
+.input-row button#mediaButton {
+  width: 52px;
+  min-width: 52px;
+  padding: 14px 0;
+  background: var(--surface-soft);
+  color: var(--text);
+}
+
+.input-row button#extraButton:hover {
+  background: #334155;
 }
 
 .input-row button:hover {
