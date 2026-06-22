@@ -102,6 +102,7 @@ function appendMessage(text, user) {
     var is_sameUser = false;
     
     // Attempting to get last message
+    var lastMessage;
     try {    
         const lastMessage = messageList.lastChild;
         if (userLabel === lastMessage.dataset.user) {
