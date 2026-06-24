@@ -56,6 +56,9 @@ socket.on('connect', () => {
     socket.emit("user", myuser)
     socket.emit("room", room_code)
 
+
+    // testing href linking
+    appendMessage("https://sigmaboi.hackclub.app/", "server")
 });
 
 // Messaging
@@ -138,13 +141,13 @@ function appendMessage(text, user) {
 
     // Code to bundle same-user messages
     if (lastMessage != null && is_sameUser) {
-        lastMessage.innerHTML += `<p>\n ${text}</p>`;
+        lastMessage.innerHTML += `<p>${text}</p>`;
     }
 
     else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
-        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} \n</small>
+        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
         <p>${text}</p>
         `;
 
