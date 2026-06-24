@@ -74,7 +74,7 @@ socket.on("message", (text) => {
 
 })
 
-// Code to send videos
+// Code to send media
 const mediaBtn = document.getElementById("mediaButton");
 
 
@@ -138,13 +138,13 @@ function appendMessage(text, user) {
 
     // Code to bundle same-user messages
     if (lastMessage != null && is_sameUser) {
-        lastMessage.innerHTML += `<p>\n${text}</p>`;
+        lastMessage.innerHTML += `<p>\n ${text}</p>`;
     }
 
     else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
-        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n</small>
+        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} \n</small>
         <p>${text}</p>
         `;
 
