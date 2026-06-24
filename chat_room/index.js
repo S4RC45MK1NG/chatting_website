@@ -140,7 +140,7 @@ function appendMessage(text, user) {
 
     // Code to bundle same-user messages
     if (lastMessage != null && is_sameUser) {
-        lastMessage.innerHTML += `<p>${text}</p>`;
+        lastMessage.innerHTML += `<p>\n${text}</p>`;
         
         // Debugging
         console.log("same user found");
