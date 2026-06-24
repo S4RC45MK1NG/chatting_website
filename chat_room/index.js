@@ -176,7 +176,7 @@ chatInput.addEventListener('input', () => {
 });
 
 chatInput.addEventListener('keydown', event => {
-    if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() == "") {
+    if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() != "") {
     event.preventDefault();
     sendMessage();
     }
