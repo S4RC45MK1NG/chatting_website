@@ -139,7 +139,7 @@ function appendMessage(text, user) {
     message.setAttribute("data-user", user);
 
     // Code to bundle same-user messages
-    if (lastMessage != NULL && is_sameUser) {
+    if (lastMessage != null && is_sameUser) {
         lastMessage.innerHTML += `<p>${text}</p>`;
         
         // Debugging
