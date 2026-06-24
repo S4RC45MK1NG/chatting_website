@@ -107,8 +107,6 @@ function appendMessage(text, user) {
         lastMessage = messageList.lastChild;
         if (userLabel === lastMessage.dataset.user) {
             is_sameUser = true;
-            // debugging
-            console.log("found same user sending consecutive messages.")
         }
     }
     catch (err) {
@@ -141,24 +139,16 @@ function appendMessage(text, user) {
     // Code to bundle same-user messages
     if (lastMessage != null && is_sameUser) {
         lastMessage.innerHTML += `<p>\n${text}</p>`;
-        
-        // Debugging
-        console.log("same user found");
-        
     }
 
     else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
-        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n</small>
         <p>${text}</p>
         `;
 
         messageList.appendChild(message);
-        
-        // Debugging
-        console.log("different users");
-        
     }
 
     

@@ -141,8 +141,12 @@ body {
   display: inline-block;
 }
 
+.message a {
+  display: inline-block;
+}
+
 .message small {
-  display: block;
+  display: inline-block;
   margin-top: 12px;
   font-size: 0.78rem;
   color: inherit;
