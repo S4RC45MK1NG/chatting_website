@@ -134,6 +134,7 @@ function appendMessage(text, user) {
             sect[i] = `<a href="${sect[i]}">${sect[i]}</a>`;
             console.log("found a link");
         }
+        console.log(sect[i]);
     }
 
     // Set an attribute to the message regarding the username
@@ -175,7 +176,7 @@ function sendMessage() {
 
 
 chatInput.addEventListener('input', () => {
-    sendButton.disabled = chatInput.value.trim() == "";
+    sendButton.disabled = chatInput.value.trim() == "" || chatInput.value.trim() == null;
 });
 
 chatInput.addEventListener('keydown', event => {
