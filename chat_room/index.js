@@ -172,11 +172,11 @@ function sendMessage() {
 
 
 chatInput.addEventListener('input', () => {
-    sendButton.disabled = chatInput.value.trim() != "";
+    sendButton.disabled = chatInput.value.trim() == "";
 });
 
 chatInput.addEventListener('keydown', event => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() == "") {
     event.preventDefault();
     sendMessage();
     }
