@@ -103,6 +103,7 @@ body {
 .message strong {
   display: inline-block;
   margin-bottom: 8px;
+  text-align: left;
 }
 .message p {
   margin: 0;
