@@ -127,7 +127,7 @@ function appendMessage(text, user) {
 
     
     // Code to filter out hyperlinks
-    let sect = text.split(" ");
+    var sect = text.split(" ");
     var link_loc;
     for (var i=0; i < sect.length; i++) {
         if (sect[i].slice(0, 3) === "http") {
@@ -136,20 +136,21 @@ function appendMessage(text, user) {
         }
         console.log(sect[i]);
     }
+    const processedtxt = sect.join(" ")
 
     // Set an attribute to the message regarding the username
     message.setAttribute("data-user", user);
 
     // Code to bundle same-user messages
     if (lastMessage != null && is_sameUser) {
-        lastMessage.innerHTML += `<p>${text}</p>`;
+        lastMessage.innerHTML += `<p>${processedtxt}</p>`;
     }
 
     else {
         message.innerHTML = `
         <strong>${userLabel}</strong>
         <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
-        <p>${text}</p>
+        <p>${processedtxt}</p>
         `;
 
         messageList.appendChild(message);
