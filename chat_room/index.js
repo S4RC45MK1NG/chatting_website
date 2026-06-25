@@ -130,7 +130,7 @@ function appendMessage(text, user) {
     var sect = text.split(" ");
     var link_loc;
     for (var i=0; i < sect.length; i++) {
-        if (sect[i].slice(0, 3) === "http") {
+        if (/^https?:\/\//i.test(sect[i])) {
             sect[i] = `<a href="${sect[i]}">${sect[i]}</a>`;
             console.log("found a link");
         }
