@@ -131,7 +131,7 @@ function appendMessage(text, user) {
     var link_loc;
     for (var i=0; i < sect.length; i++) {
         if (/^https?:\/\//i.test(sect[i]) || /^http?:\/\//i.test(sect[i])) {
-            sect[i] = `<a href="${sect[i]}">${sect[i]}</a>`;
+            sect[i] = `<a href="${sect[i]}" target='_blank'>${sect[i]}</a>`;
             console.log("found a link");
         }
         console.log(sect[i]);
