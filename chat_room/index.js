@@ -79,13 +79,29 @@ socket.on("message", (text) => {
 
 })
 
+// Code to recieve the media
+socket("media", (file) => {
+    const media = document.createElement("article");
+    console.log(file)
+    media.innerHTML = `
+    <strong>(dunno who sent this, i'll add ts later) </strong>
+    <image src="" alt="media"></image>
+    `;
+
+    messageList.append(media);
+})
+
 // Code to send media
 mediaBtn.addEventListener("click", () => {
     mediaInput.click();
 })
 
 mediaInput.addEventListener("change", () => {
-    console.log(mediaInput.files);
+    
+    const files = mediaInput.files;
+    console.log(files);
+
+    socket.emit('media', files);
 })
 
 // Disconnect

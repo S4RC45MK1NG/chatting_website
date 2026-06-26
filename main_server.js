@@ -36,6 +36,10 @@ io.on('connection', (socket) => {
         io.to(socket.currentRoom).emit('message', msg);
     });
 
+    socket.on("media", (files) => {
+        console.log(`Recieved files: ${files}`);
+    })
+
     socket.on('disconnect', (reason) => {
         console.log(`User disconnected: ${socket.id}`);
         delete users[user_id];
