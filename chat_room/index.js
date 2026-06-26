@@ -6,6 +6,8 @@ const socket = io();
 const messageList = document.getElementById('messageList');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
+const mediaInput = document.getElementById('mediaInput');
+const mediaBtn = document.getElementById('mediaButton');
 const theme_set = document.getElementById("mode-switch");
 const link = document.getElementById('themeStyle'); // Reference to theme css file
 
@@ -78,9 +80,13 @@ socket.on("message", (text) => {
 })
 
 // Code to send media
-const mediaBtn = document.getElementById("mediaButton");
+mediaBtn.addEventListener("click", () => {
+    mediaInput.click();
+})
 
-
+mediaInput.addEventListener("change", () => {
+    console.log(mediaInput.files);
+})
 
 // Disconnect
 socket.on("disconnect", (reason) => {

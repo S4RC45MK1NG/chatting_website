@@ -25,11 +25,14 @@
     </section>
 
     <section class="input-row">
+      <div id="previewArea"></div>
       <textarea id="chatInput" placeholder="Write your message..." rows="1"></textarea>
       <button id="mediaButton" type="button">+</button>
       <button id="sendButton" type="button">Send</button>
     </section>
   </main>
+
+  <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" hidden>
   
   <script type="module" src="index.js"></script>
 </body>
