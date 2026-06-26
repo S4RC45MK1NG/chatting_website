@@ -100,8 +100,6 @@ mediaInput.addEventListener("change", () => {
     
     const files = mediaInput.files;
     console.log(files);
-
-    socket.emit('media', files);
 })
 
 // Disconnect
