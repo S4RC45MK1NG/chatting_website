@@ -148,7 +148,7 @@ function appendMessage(text, user) {
     }
 
     
-    // Code to filter out hyperlinks
+    // Code to filter out hyperlinks in text
     var sect = text.split(" ");
     var link_loc;
     for (var i=0; i < sect.length; i++) {

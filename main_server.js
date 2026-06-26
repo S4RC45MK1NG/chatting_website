@@ -2,6 +2,9 @@ import { Server } from "socket.io";
 import express from "express";
 import { createServer } from "http";
 
+import fs from "fs";
+import path from "path";
+
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
@@ -38,6 +41,21 @@ io.on('connection', (socket) => {
 
     socket.on("media", (files) => {
         console.log(`Recieved files: ${files}`);
+        /* Sending Files directly
+        for (var i=0; i < files.length; i++) {
+            io.to(socket.currentRoom).emit("media", files[i]);
+        }
+
+        */
+
+        /*
+        
+        for (var i=0; i < files.length; i++) {
+            fs.writeFileSync("", files[i])
+            
+        }
+
+        */
     })
 
     socket.on('disconnect', (reason) => {
