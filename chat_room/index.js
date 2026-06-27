@@ -80,7 +80,7 @@ socket.on("message", (text) => {
 })
 
 // Code to recieve the media
-socket("media", (file) => {
+socket.on("media", (file) => {
     const media = document.createElement("article");
     console.log(file);
 
@@ -196,7 +196,7 @@ chatInput.addEventListener('input', () => {
 });
 
 chatInput.addEventListener('keydown', event => {
-    if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() != "") {
+    if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() != null) {
         event.preventDefault();
         sendMessage();
     }

@@ -139,7 +139,7 @@ body {
 
 .message p {
   margin: 0;
-  display: inline-block;
+  display: block;
 }
 
 .message a {
