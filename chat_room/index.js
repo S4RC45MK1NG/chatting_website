@@ -94,7 +94,7 @@ mediaBtn.addEventListener("click", () => {
 mediaInput.addEventListener("change", () => {
     
     const files = mediaInput.files;
-    console.log(files);
+    socket.emit(files)
 })
 
 // Disconnect
@@ -145,7 +145,7 @@ function appendMessage(text, user) {
     var sect = text.split(" ");
     var link_loc;
     for (var i=0; i < sect.length; i++) {
-        if (/^https?:\/\//i.test(sect[i]) || /^http?:\/\//i.test(sect[i])) {
+        if (/^https?:\/\//i.test(sect[i]) || /^http?:\/\//i.test(sect[i]) || /^www./.test(sect[i])) {
             sect[i] = `<a href="${sect[i]}" target='_blank'>${sect[i]}</a>`;
             console.log("found a link");
         }
@@ -171,7 +171,6 @@ function appendMessage(text, user) {
         messageList.appendChild(message);
     }
 
-    
     messageList.scrollTop = messageList.scrollHeight;
 }
 
