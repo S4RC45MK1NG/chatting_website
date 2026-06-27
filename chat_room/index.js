@@ -82,13 +82,8 @@ socket.on("message", (text) => {
 // Code to recieve the media
 socket("media", (file) => {
     const media = document.createElement("article");
-    console.log(file)
-    media.innerHTML = `
-    <strong>(dunno who sent this, i'll add ts later) </strong>
-    <image src="" alt="media"></image>
-    `;
+    console.log(file);
 
-    messageList.append(media);
 })
 
 // Code to send media
@@ -202,8 +197,8 @@ chatInput.addEventListener('input', () => {
 
 chatInput.addEventListener('keydown', event => {
     if (event.key === 'Enter' && !event.shiftKey && chatInput.value.trim() != "") {
-    event.preventDefault();
-    sendMessage();
+        event.preventDefault();
+        sendMessage();
     }
 });
 

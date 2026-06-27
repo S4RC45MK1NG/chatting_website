@@ -134,6 +134,7 @@ body {
 .message strong {
   display: inline-block;
   margin-bottom: 8px;
+  box-align: left;
 }
 
 .message p {
@@ -147,7 +148,7 @@ body {
 
 .message small {
   display: inline-block;
-  text-align: right;
+  box-align: right;
   font-size: 0.78rem;
   color: inherit;
   opacity: 0.72;
