@@ -97,10 +97,10 @@ mediaBtn.addEventListener("click", () => {
 mediaInput.addEventListener("change", () => {
     
     // Debugging
-    console.log("sent media to server")
+    console.log("sent media to server");
 
     const files = mediaInput.files;
-    socket.emit(files)
+    socket.emit(files);
 })
 
 // Disconnect
