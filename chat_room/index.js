@@ -83,7 +83,20 @@ socket.on("message", (text) => {
 socket.on("media", (file) => {
     const media = document.createElement("article");
     console.log(file);
+    if (!file || !file.data) return;
 
+    if (file.type.startsWith("image/")) {
+        media.innerHTML = `<img src="${file.data}" alt="${file.name}" />`;
+    } else if (file.type.startsWith("video/")) {
+        media.innerHTML = `<video controls src="${file.data}"></video>`;
+    } else if (file.type.startsWith("audio/")) {
+        media.innerHTML = `<audio controls src="${file.data}"></audio>`;
+    } else {
+        media.innerHTML = `<a href="${file.data}" download="${file.name}">Download ${file.name}</a>`;
+    }
+
+    messageList.appendChild(media);
+    messageList.scrollTop = messageList.scrollHeight;
 })
 
 // Code to send media
@@ -95,12 +108,20 @@ mediaBtn.addEventListener("click", () => {
 })
 
 mediaInput.addEventListener("change", () => {
-    
-    // Debugging
-    console.log("sent media to server");
+    const file = mediaInput.files[0];
+    if (!file) return;
 
-    const files = mediaInput.files;
-    socket.emit("media", files[0]);
+    console.log("sending media to server:", file.name, file.type);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        socket.emit("media", {
+            name: file.name,
+            type: file.type,
+            data: reader.result
+        });
+    };
+    reader.readAsDataURL(file);
 })
 
 // Disconnect

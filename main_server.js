@@ -39,21 +39,10 @@ io.on('connection', (socket) => {
         io.to(socket.currentRoom).emit('message', msg);
     });
 
-    socket.on("media", (files) => {
-        /* Sending Files directly
-        for (var i=0; i < files.length; i++) {
-            io.to(socket.currentRoom).emit("media", files[i]);
-        }
-
-        */
-
-        for (var i=0; i < files.length; i++) {
-            fs.writeFileSync(`/root/media_folder/${files[i].name}`, files[i])
-            
-            // Debugging
-            console.log("written file to disk");
-        }
-
+    socket.on("media", (file) => {
+        if (!file || !file.data) return;
+        console.log(`Received media: ${file.name} (${file.type})`);
+        io.to(socket.currentRoom).emit("media", file);
     });
 
     socket.on('disconnect', (reason) => {
