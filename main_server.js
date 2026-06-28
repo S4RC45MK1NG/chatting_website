@@ -41,7 +41,6 @@ io.on('connection', (socket) => {
 
     socket.on("media", (file) => {
         if (!file || !file.data) return;
-        console.log(`Received media: ${file.name} (${file.type})`);
         io.to(socket.currentRoom).emit("media", file);
     });
 

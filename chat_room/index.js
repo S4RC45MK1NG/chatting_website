@@ -81,41 +81,23 @@ socket.on("message", (text) => {
 
 // Code to recieve the media
 socket.on("media", (file) => {
-    const media = document.createElement("article");
-    console.log(file);
     if (!file || !file.data) return;
-
-    if (file.type.startsWith("image/")) {
-        media.innerHTML = `<img src="${file.data}" alt="${file.name}" />`;
-    } else if (file.type.startsWith("video/")) {
-        media.innerHTML = `<video controls src="${file.data}"></video>`;
-    } else if (file.type.startsWith("audio/")) {
-        media.innerHTML = `<audio controls src="${file.data}"></audio>`;
-    } else {
-        media.innerHTML = `<a href="${file.data}" download="${file.name}">Download ${file.name}</a>`;
-    }
-
-    messageList.appendChild(media);
-    messageList.scrollTop = messageList.scrollHeight;
+    appendMedia(file, file.user || "server");
 })
 
 // Code to send media
 mediaBtn.addEventListener("click", () => {
     mediaInput.click();
-    
-    // Debugging
-    console.log("clicked the media btn");
 })
 
 mediaInput.addEventListener("change", () => {
     const file = mediaInput.files[0];
     if (!file) return;
 
-    console.log("sending media to server:", file.name, file.type);
-
     const reader = new FileReader();
     reader.onload = () => {
         socket.emit("media", {
+            user: myuser,
             name: file.name,
             type: file.type,
             data: reader.result
@@ -198,6 +180,37 @@ function appendMessage(text, user) {
         messageList.appendChild(message);
     }
 
+    messageList.scrollTop = messageList.scrollHeight;
+}
+
+function appendMedia(file, user) {
+    const message = document.createElement('article');
+    message.className = 'message ' + user;
+    let userLabel = user;
+
+    if (userLabel === myuser) {
+        userLabel = "You";
+    }
+
+    let mediaMarkup = '';
+    if (file.type.startsWith("image/")) {
+        mediaMarkup = `<img src="${file.data}" alt="${file.name}" />`;
+    } else if (file.type.startsWith("video/")) {
+        mediaMarkup = `<video controls src="${file.data}"></video>`;
+    } else if (file.type.startsWith("audio/")) {
+        mediaMarkup = `<audio controls src="${file.data}"></audio>`;
+    } else {
+        mediaMarkup = `<a href="${file.data}" download="${file.name}">Download ${file.name}</a>`;
+    }
+
+    message.innerHTML = `
+        <strong>${userLabel}</strong>
+        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+        ${mediaMarkup}
+    `;
+
+    message.setAttribute("data-user", user);
+    messageList.appendChild(message);
     messageList.scrollTop = messageList.scrollHeight;
 }
 
