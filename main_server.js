@@ -39,9 +39,7 @@ io.on('connection', (socket) => {
         io.to(socket.currentRoom).emit('message', msg);
     });
 
-    socket.on("media", (files, status) => {
-        console.log(status);
-        console.log(`Recieved files: ${files}`);
+    socket.on("media", (files) => {
         /* Sending Files directly
         for (var i=0; i < files.length; i++) {
             io.to(socket.currentRoom).emit("media", files[i]);
