@@ -112,6 +112,19 @@ body {
 .message a {
   display: inline-block;
 }
+.message img,
+.message video,
+.message audio {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+  margin-top: 12px;
+}
+.message video,
+.message audio {
+  max-height: 320px;
+}
 .message small {
   display: inline-block;
   box-align: right;
