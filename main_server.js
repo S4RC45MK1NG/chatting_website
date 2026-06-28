@@ -49,15 +49,14 @@ io.on('connection', (socket) => {
 
         */
 
-        /*
-        
         for (var i=0; i < files.length; i++) {
-            fs.writeFileSync("", files[i])
+            fs.writeFileSync(`/root/media_folder/${files[i].name}`, files[i])
             
+            // Debugging
+            console.log("written file to disk");
         }
 
-        */
-    })
+    });
 
     socket.on('disconnect', (reason) => {
         console.log(`User disconnected: ${socket.id}`);
