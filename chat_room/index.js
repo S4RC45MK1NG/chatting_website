@@ -89,10 +89,16 @@ socket.on("media", (file) => {
 // Code to send media
 mediaBtn.addEventListener("click", () => {
     mediaInput.click();
+    
+    // Debugging
+    console.log("clicked the media btn");
 })
 
 mediaInput.addEventListener("change", () => {
     
+    // Debugging
+    console.log("sent media to server")
+
     const files = mediaInput.files;
     socket.emit(files)
 })
