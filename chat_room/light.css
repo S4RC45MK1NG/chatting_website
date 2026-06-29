@@ -125,6 +125,7 @@ body {
   height: auto;
   border-radius: 18px;
   margin-top: 12px;
+  margin-bottom: 12px;
 }
 .message video,
 .message audio {
