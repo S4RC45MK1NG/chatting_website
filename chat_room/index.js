@@ -188,6 +188,23 @@ function appendMedia(file, user) {
     message.className = 'message ' + user;
     let userLabel = user;
 
+    var is_sameUser = false;
+    
+    // Attempting to get last message
+    var lastMessage;
+    try {    
+        lastMessage = messageList.lastChild;
+        if (userLabel === lastMessage.dataset.user) {
+            is_sameUser = true;
+        }
+    }
+    catch (err) {
+        const lastMessage = null;
+        console.log(`Error Logged:\n${err}`);
+        console.log("Couldn't get last message");
+    }
+
+
     if (userLabel === myuser) {
         userLabel = "You";
     }
@@ -203,12 +220,18 @@ function appendMedia(file, user) {
         mediaMarkup = `<a href="${file.data}" download="${file.name}">Download ${file.name}</a>`;
     }
 
-    message.innerHTML = `
-        <strong>${userLabel}</strong>
-        <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
-        ${mediaMarkup}
-    `;
+    if (is_sameUser) {
+        lastMessage.innerHTML += (mediaMarkup);
+    }
+    else {
+        message.innerHTML = `
+            <strong>${userLabel}</strong>
+            <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+            ${mediaMarkup}
+        `;
+    }
 
+    
     message.setAttribute("data-user", user);
     messageList.appendChild(message);
     messageList.scrollTop = messageList.scrollHeight;
