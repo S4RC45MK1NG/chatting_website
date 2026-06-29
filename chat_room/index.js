@@ -229,11 +229,12 @@ function appendMedia(file, user) {
             <small>${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
             ${mediaMarkup}
         `;
+        message.setAttribute("data-user", user);
+        messageList.appendChild(message);
     }
 
+
     
-    message.setAttribute("data-user", user);
-    messageList.appendChild(message);
     messageList.scrollTop = messageList.scrollHeight;
 }
 
