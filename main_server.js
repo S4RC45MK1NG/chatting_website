@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
         }
         else {
             users[room_code] = [];
-            users[room_code] += `${user_id}: ${username}`;
+            users[room_code].push({user_id: username});
         }
 
         socket.join(room_code);
