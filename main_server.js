@@ -64,9 +64,9 @@ io.on('connection', (socket) => {
         console.log(`User disconnected: ${socket.id}`);
         console.log(`Current Room: ${socket.currentRoom}`);
 
-        console.log(`Attempt at : ${roomUsers}`);
+        console.log(`Attempt at : ${users[socket.currentRoom]}`);
         console.log(`Users in room ${socket.currentRoom}: ${users[socket.currentRoom]}`);
-        //users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({user_id: socket.id}), 1);
+        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({user_id: socket.id}), 1);
         console.log(`Reason: ${reason}`);
     });
 
