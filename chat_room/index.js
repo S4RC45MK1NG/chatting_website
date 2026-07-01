@@ -10,6 +10,8 @@ const mediaInput = document.getElementById('mediaInput');
 const mediaBtn = document.getElementById('mediaButton');
 const theme_set = document.getElementById("mode-switch");
 const link = document.getElementById('themeStyle'); // Reference to theme css file
+const userNameDisplay = document.getElementById('userNameDisplay');
+const userAvatar = document.getElementById('userAvatar');
 
 // Theme Changer Button Code
 theme_set.addEventListener("click", () => {
@@ -45,6 +47,15 @@ function get_cookie(arg) {
 // To get the required cookies
 const myuser = get_cookie("chat-user");
 const room_code = get_cookie("room-code");
+const displayName = myuser || "Guest";
+
+if (userNameDisplay) {
+    userNameDisplay.textContent = displayName;
+}
+
+if (userAvatar) {
+    userAvatar.textContent = displayName.charAt(0).toUpperCase();
+}
 
 // Status Check Element
 const status = document.getElementById("status");
