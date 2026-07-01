@@ -14,16 +14,16 @@ const link = document.getElementById('themeStyle'); // Reference to theme css fi
 // Theme Changer Button Code
 theme_set.addEventListener("click", () => {
     if (theme_set.dataset.theme == "light") {
-    link.href = "dark.css";
-    theme_set.dataset.theme = "dark";
-    theme_set.textContent = "🌙";
-    console.log("set to dark mode");
+        link.href = "dark.css";
+        theme_set.dataset.theme = "dark";
+        theme_set.textContent = "🌙";
+        console.log("set to dark mode");
     }
     else {
-    link.href = "light.css"
-    theme_set.dataset.theme = "light";
-    theme_set.textContent = "☀️";
-    console.log("set to light mode");
+        link.href = "light.css"
+        theme_set.dataset.theme = "light";
+        theme_set.textContent = "☀️";
+        console.log("set to light mode");
     }
 })
 
@@ -55,12 +55,7 @@ socket.on('connect', () => {
     console.log(socket.id);
     status.textContent = "Online";
     status.style.setProperty("--before-bg", "#34d399");
-    socket.emit("user", myuser)
-    socket.emit("room", room_code)
-
-
-    // testing href linking
-    appendMessage("https://sigmaboi.hackclub.app/", "server")
+    socket.emit("join-info", [myuser, room_code])
 });
 
 // Messaging
@@ -128,7 +123,7 @@ function appendMessage(text, user) {
 
     var is_sameUser = false;
     
-    // Attempting to get last message
+    // Attempting to get last message (just coz the first msg after joining cannot find a previous msg)
     var lastMessage;
     try {    
         lastMessage = messageList.lastChild;
@@ -183,6 +178,7 @@ function appendMessage(text, user) {
     messageList.scrollTop = messageList.scrollHeight;
 }
 
+
 function appendMedia(file, user) {
     const message = document.createElement('article');
     message.className = 'message ' + user;
@@ -190,7 +186,7 @@ function appendMedia(file, user) {
 
     var is_sameUser = false;
     
-    // Attempting to get last message
+    // Attempting to get last message (just coz the first msg after joining cannot find a previous msg)
     var lastMessage;
     try {    
         lastMessage = messageList.lastChild;
@@ -233,8 +229,6 @@ function appendMedia(file, user) {
         messageList.appendChild(message);
     }
 
-
-    
     messageList.scrollTop = messageList.scrollHeight;
 }
 
@@ -247,8 +241,8 @@ function sendMessage() {
     chatInput.value = '';
     sendButton.disabled = true;
     setTimeout(() => {
-    sendButton.disabled = false;
-    chatInput.focus();
+        sendButton.disabled = false;
+        chatInput.focus();
     }, 600);
 }
 

@@ -4,6 +4,7 @@ import { createServer } from "http";
 
 import fs from "fs";
 import path from "path";
+import { info } from "console";
 
 const app = express();
 const server = createServer(app);
@@ -14,7 +15,6 @@ const io = new Server(server, {
 
 var users = {};
 
-
 io.on('connection', (socket) => {
     
     const user_id = socket.id;
@@ -22,15 +22,23 @@ io.on('connection', (socket) => {
     console.log(`User connected: ${user_id}`);
     
 
-    socket.on("user", (username) => {
-        users[user_id] = username;
-        console.log(users);
-    })
+    socket.on("join-info", (info) => {
+        const [username, room_code] = info;
+        
+        // Check to create rooms if there wasn;t already one
+        if (room_code in users) {
+            users.room_code += {user_id: username};
+        }
+        else {
+            users[room_code] = [];
+            users[room_code] += `${user_id}: ${username}`;
+        }
 
-    socket.on("room", (room_code) => {
-        socket.join(room_code)
+        socket.join(room_code);
         socket.currentRoom = room_code;
+        io.to(room_code).emit("userList", users);
         console.log(`Connected ${user_id} to room ${room_code}`);
+        console.log(users);
     })
 
     socket.on('message', (msg) => {
@@ -46,7 +54,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', (reason) => {
         console.log(`User disconnected: ${socket.id}`);
-        delete users[user_id];
+        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf(`${socket.id}: ${users}`), 1);
         console.log(`Reason: ${reason}`);
     });
 
