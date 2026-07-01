@@ -13,6 +13,14 @@ const io = new Server(server, {
     pingInterval: 10000
 });
 
+
+// Follows the struct
+/*
+{
+    room1 : [{user1: name}, {user2: name}, ...]
+    room2 : [{user1: name}, {user2: name}, ...]
+}
+*/
 var users = {};
 
 io.on('connection', (socket) => {
@@ -25,9 +33,9 @@ io.on('connection', (socket) => {
     socket.on("join-info", (info) => {
         const [username, room_code] = info;
         
-        // Check to create rooms if there wasn;t already one
+        // Check to create rooms if there wasn't already one
         if (room_code in users) {
-            users.room_code += {user_id: username};
+            users[room_code].push({user_id: username});
         }
         else {
             users[room_code] = [];
@@ -54,7 +62,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', (reason) => {
         console.log(`User disconnected: ${socket.id}`);
-        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf(`${socket.id}: ${users}`), 1);
+        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({user_id: socket.id}), 1);
         console.log(`Reason: ${reason}`);
     });
 
