@@ -37,8 +37,10 @@ body {
 }
 
 .chat-app {
-  width: min(100%, 1000px);
-  height: min(100%, 820px);
+  width: 1000px;
+  max-width: min(100%, 1000px);
+  min-height: 80vh;
+  height: 95vh;
   max-height: 100vh;
   border-radius: 28px;
   background: var(--surface);
