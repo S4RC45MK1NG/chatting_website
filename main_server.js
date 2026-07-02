@@ -62,12 +62,20 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', (reason) => {
         console.log(`User disconnected: ${socket.id}`);
-        console.log(`Current Room: ${socket.currentRoom}`);
+        const room = socket.currentRoom;
+        if (!room || !users[room]) {
+            console.log(`No room found for disconnected user ${socket.id}`);
+            return;
+        }
 
-        console.log(`Attempt at : ${JSON.stringify(users[socket.currentRoom])}`);
-        console.log(`Users in room ${socket.currentRoom}: ${JSON.stringify(users[socket.currentRoom])}`);
-        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({socket: socket.id, username: users[socket.currentRoom].find(u => u.socket === socket.id)?.username}), 1);
-        console.log(`Users in room ${socket.currentRoom} after removal: ${JSON.stringify(users[socket.currentRoom])}`);
+        users[room] = users[room].filter(u => u.socket !== socket.id);
+        if (users[room].length === 0) {
+            delete users[room];
+        } else {
+            io.to(room).emit("userList", users);
+        }
+
+        console.log(`Users in room ${room} after removal: ${JSON.stringify(users[room] || [])}`);
         console.log(`Reason: ${reason}`);
     });
 

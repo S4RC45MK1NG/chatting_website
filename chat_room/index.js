@@ -10,8 +10,6 @@ const mediaInput = document.getElementById('mediaInput');
 const mediaBtn = document.getElementById('mediaButton');
 const theme_set = document.getElementById("mode-switch");
 const link = document.getElementById('themeStyle'); // Reference to theme css file
-const userNameDisplay = document.getElementById('userNameDisplay');
-const userAvatar = document.getElementById('userAvatar');
 
 // Theme Changer Button Code
 theme_set.addEventListener("click", () => {
@@ -47,18 +45,11 @@ function get_cookie(arg) {
 // To get the required cookies
 const myuser = get_cookie("chat-user");
 const room_code = get_cookie("room-code");
-const displayName = myuser || "Guest";
-
-if (userNameDisplay) {
-    userNameDisplay.textContent = displayName;
-}
-
-if (userAvatar) {
-    userAvatar.textContent = displayName.charAt(0).toUpperCase();
-}
 
 // Status Check Element
 const status = document.getElementById("status");
+const userList = document.getElementById('userList');
+const userCount = document.getElementById('userCount');
 status.style.setProperty("--before-bg", "#d33e34");
 
 // Connection 
@@ -68,6 +59,27 @@ socket.on('connect', () => {
     status.style.setProperty("--before-bg", "#34d399");
     socket.emit("join-info", [myuser, room_code])
 });
+
+socket.on("userList", (allUsers) => {
+    const roomUsers = Array.isArray(allUsers?.[room_code]) ? allUsers[room_code] : [];
+    renderUserList(roomUsers);
+});
+
+function renderUserList(roomUsers) {
+    userCount.textContent = roomUsers.length;
+
+    if (roomUsers.length === 0) {
+        userList.innerHTML = '<li class="user-item">No users in this room yet</li>';
+        return;
+    }
+
+    userList.innerHTML = roomUsers.map(user => {
+        const displayName = user.username === myuser ? 'You' : user.username;
+        const classes = ['user-item'];
+        if (user.username === myuser) classes.push('self');
+        return `<li class="${classes.join(' ')}">${displayName}</li>`;
+    }).join('');
+}
 
 // Messaging
 socket.on("message", (text) => {

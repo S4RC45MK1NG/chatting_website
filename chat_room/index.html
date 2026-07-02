@@ -10,34 +10,38 @@
 </head>
 <body>
   <button class="mode-switch" id="mode-switch" data-theme="light">☀️</button>
-  <div class="chat-layout">
-    <main class="chat-app" aria-label="Chat interface">
-      <section class="header">
-        <div>
-          <h1>Chat Interface</h1>
-          <p>Start typing to send messages in the conversation.</p>
-        </div>
-        <span class="status" id="status">Offline</span>
-      </section>
+  <main class="chat-app" aria-label="Chat interface">
+    
+    <section class="header">
+      <div>
+        <h1>Chat Interface</h1>
+        <p>Start typing to send messages in the conversation.</p>
+      </div>
+      <span class="status" id="status">Offline</span>
+    </section>
 
+    <div class="main-content">
       <section class="messages" id="messageList" aria-live="polite" aria-label="Message thread">
       </section>
 
-      <section class="input-row">
-        <textarea id="chatInput" placeholder="Write your message..." rows="1"></textarea>
-        <button id="mediaButton" type="button">+</button>
-        <button id="sendButton" type="button">Send</button>
-      </section>
-    </main>
+      <aside class="user-panel" aria-label="Active room users">
+        <div class="user-panel__header">
+          <div>
+            <h2>Room Users</h2>
+            <p class="user-panel__subtitle">Connected to this room</p>
+          </div>
+          <span class="user-count" id="userCount">0</span>
+        </div>
+        <ul id="userList" class="user-list" aria-live="polite"></ul>
+      </aside>
+    </div>
 
-    <aside class="user-panel" aria-label="Current user">
-      <div class="user-avatar" id="userAvatar">U</div>
-      <div class="user-details">
-        <h2 id="userNameDisplay">Username</h2>
-        <p>Active in this room</p>
-      </div>
-    </aside>
-  </div>
+    <section class="input-row">
+      <textarea id="chatInput" placeholder="Write your message..." rows="1"></textarea>
+      <button id="mediaButton" type="button">+</button>
+      <button id="sendButton" type="button">Send</button>
+    </section>
+  </main>
 
   <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" hidden>
   
