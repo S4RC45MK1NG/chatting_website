@@ -20,21 +20,8 @@
       <span class="status" id="status">Offline</span>
     </section>
 
-    <div class="main-content">
       <section class="messages" id="messageList" aria-live="polite" aria-label="Message thread">
       </section>
-
-      <aside class="user-panel" aria-label="Active room users">
-        <div class="user-panel__header">
-          <div>
-            <h2>Room Users</h2>
-            <p class="user-panel__subtitle">Connected to this room</p>
-          </div>
-          <span class="user-count" id="userCount">0</span>
-        </div>
-        <ul id="userList" class="user-list" aria-live="polite"></ul>
-      </aside>
-    </div>
 
     <section class="input-row">
       <textarea id="chatInput" placeholder="Write your message..." rows="1"></textarea>
@@ -42,6 +29,17 @@
       <button id="sendButton" type="button">Send</button>
     </section>
   </main>
+
+  <aside class="user-panel" aria-label="Active room users">
+    <div class="user-panel__header">
+      <div>
+        <h2>Room Users</h2>
+        <p class="user-panel__subtitle">Connected to this room</p>
+      </div>
+      <span class="user-count" id="userCount">0</span>
+    </div>
+    <ul id="userList" class="user-list" aria-live="polite"></ul>
+  </aside>
 
   <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" hidden>
   
