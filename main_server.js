@@ -35,11 +35,11 @@ io.on('connection', (socket) => {
         
         // Check to create rooms if there wasn't already one
         if (room_code in users) {
-            users[room_code].push({user_id: username});
+            users[room_code].push({socket: user_id, username: username});
         }
         else {
             users[room_code] = [];
-            users[room_code].push({user_id: username});
+            users[room_code].push({socket: user_id, username: username});
         }
 
         socket.join(room_code);
@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
 
         console.log(`Attempt at : ${JSON.stringify(users[socket.currentRoom])}`);
         console.log(`Users in room ${socket.currentRoom}: ${JSON.stringify(users[socket.currentRoom])}`);
-        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({user_id: socket.id}), 1);
+        users[socket.currentRoom].splice(users[socket.currentRoom].indexOf({socket: socket.id, username: users[socket.currentRoom].find(u => u.socket === socket.id)?.username}), 1);
         console.log(`Users in room ${socket.currentRoom} after removal: ${JSON.stringify(users[socket.currentRoom])}`);
         console.log(`Reason: ${reason}`);
     });
