@@ -1,5 +1,4 @@
-import { io } from "https://cdn.socket.io/4.8.4/socket.io.esm.min.js";
-
+import { io } from "socket.io-client";
 const socket = io();
 
 // Defined main elements of the web app
