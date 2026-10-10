@@ -1,4 +1,4 @@
-import { io } from "socket.io-client";
+
 const socket = io();
 
 // Defined main elements of the web app
